@@ -1,4 +1,4 @@
-# 1. Overview
+# 0. Overview
 
 This is a sample project for beginners who wish to learn Node.js. We will build a small web app. To learn the concepts step by step, we suggest you clone this code repository and checkout relevant checkpoints identified by branch names.
 
@@ -21,7 +21,7 @@ To get a high-level overview of Node.js, read the [Node.js article on Devopedia]
 The rest of this document guides you through the project step by step. To try out code at a particular step, checkout the relevant branch. For example, to checkout code of `br0.1` branch, run command `git checkout br0.1`. Branch names are mentioned in section headers.
 
 
-# 2. Hello World (br0.1)
+# 1. Hello World (br0.1)
 
 Execute this command: `node hello.js`
 

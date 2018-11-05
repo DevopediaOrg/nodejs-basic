@@ -1,4 +1,4 @@
-# 1. Overview
+# 0. Overview
 
 This is a sample project for beginners who wish to learn Node.js. We will build a small web app. To learn the concepts step by step, we suggest you clone this code repository and checkout relevant checkpoints identified by branch names.
 
@@ -21,13 +21,13 @@ To get a high-level overview of Node.js, read the [Node.js article on Devopedia]
 The rest of this document guides you through the project step by step. To try out code at a particular step, checkout the relevant branch. For example, to checkout code of `br0.1` branch, run command `git checkout br0.1`. Branch names are mentioned in section headers.
 
 
-# 2. Hello World (br0.1)
+# 1. Hello World (br0.1)
 
 Execute this command: `node hello.js`
 
 This doesn't do anything useful except print out a string and exit. While Node usually is an app server listening for client requests, it can also be used to build a standalone program that does something specific and exits normally.
 
-# 3. A Hello World Server (br0.2)
+# 2. A Hello World Server (br0.2)
 
 Execute this command: `node server.js`. Access the URL from your browser. Congrats! You now have a Node-based web app running!
 
@@ -48,5 +48,3 @@ Try out the following URLs in browser: `http://localhost:8888` and `http://local
 In `server.js`, since the request callback is likely to get more complex, we give it a name `onRequest()` and then pass it to the server. We use `url` module to extract parts of the query string. This is a legacy module: there's also `URL` class as an alternative. See [URL API docs](https://nodejs.org/api/url.html) for more information.
 
 This may also be a good time to try out debugging the code in VS Code. There's already a debugging configuration in file `.vscode/launch.json` that you can use.
-
-

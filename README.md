@@ -39,3 +39,14 @@ It's a good time to get familiar with Node.js documentation. Read about the foll
 
 It will be apparent from the documentation that callback functions are the last argument. This is the convention in Node.
 
+# 3. Server as a Module (br0.3)
+
+We'll refactor the code to make the design more modular. Server code is made into a module. The app's entry point is `index.js`. Thus, we can start it by running `node index.js`
+
+Try out the following URLs in browser: `http://localhost:8888` and `http://localhost:8888?username=Johnny`
+
+In `server.js`, since the request callback is likely to get more complex, we give it a name `onRequest()` and then pass it to the server. We use `url` module to extract parts of the query string. This is a legacy module: there's also `URL` class as an alternative. See [URL API docs](https://nodejs.org/api/url.html) for more information.
+
+This may also be a good time to try out debugging the code in VS Code. There's already a debugging configuration in file `.vscode/launch.json` that you can use.
+
+

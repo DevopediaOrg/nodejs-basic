@@ -1,5 +1,7 @@
 const url = require('url');
-const querystring = require('querystring');
+const util = require('util');
+const fs = require('fs');
+const formidable = require('formidable');
 const exec = require('child_process').exec;
 
 function home(request, response) {
@@ -43,11 +45,26 @@ function list(request, response) {
   });
 }
 
-function upload(request, response, postData) {
-  const pdata = querystring.parse(postData);
-  response.writeHead(200, {'content-type': 'text/plain'});
-  response.write('Your data:\n' + JSON.stringify(pdata, null, 4));
-  response.end();
+function upload(request, response) {
+  // parse a file upload
+  const form = new formidable.IncomingForm();
+  form.parse(request, function(error, fields, files) {
+    if (error) {
+      console.log(error.message);
+      return;
+    }
+
+    // rename and save in static folder
+    var oldpath = files.upload.path;
+    var newpath = 'static/profiles/' + files.upload.name;
+    fs.rename(oldpath, newpath, function (error) {
+      if (error) console.log(error.message);
+    });
+
+    response.writeHead(200, {'Content-Type': 'text/plain'});
+    response.write('Your upload:\n');
+    response.end(util.inspect({fields: fields, files: files}));
+  });
 }
 
 exports.home = home;

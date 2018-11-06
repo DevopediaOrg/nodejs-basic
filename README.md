@@ -16,7 +16,7 @@ npm -v
 code -v
 ```
 
-To get a high-level overview of Node.js, read the [Node.js article on Devopedia](https://devopedia.org/node-js).
+To get a high-level overview of Node.js, read the [Node.js](https://devopedia.org/node-js) article on Devopedia.
 
 The rest of this document guides you through the project step by step. To try out code at a particular step, checkout the relevant branch. For example, to checkout code of `br0.1` branch, run command `git checkout br0.1`. Branch names are mentioned in section headers.
 
@@ -80,7 +80,7 @@ Note that server code is extremely simple now. Everything is handled by router a
 
 # 6. Form with File Upload (br0.6)
 
-We extend the example with a simple form. This form allows a file upload. We make use of `formidable` module. You can install it by running `npm install` since we've already recorded it as a package dependency.
+We extend the example with a simple form. This form allows a file upload. We make use of `formidable` module. You can install it by running `npm install` since we've already recorded it as a package dependency. To learn more, visit the [Dependency Manager](https://devopedia.org/dependency-manager) article on Devopedia.
 
 Open homepage, fill the form and submit it. No form validation is done but we will add this later. 
 
@@ -103,3 +103,8 @@ request
   .on('data', (chunk) => postData += chunk)
   .on('end', () => route(handle, request, response, postData));
 ```
+
+
+# 7. Refactor File Upload Code (br0.7)
+
+We refactor the code so that file upload is now done inside the handler. We remove some redundant code used earlier just for learning purpose. We no longer need `postData` variable. We send back the response after the form is fully received but before the uploaded file is renamed.

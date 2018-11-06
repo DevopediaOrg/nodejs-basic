@@ -1,13 +1,15 @@
 const url = require('url');
 
-function route(handle, request) {
+function route(handle, request, response) {
   const reqUrl = url.parse(request.url, true);
 
   if (typeof handle[reqUrl.pathname] === 'function') {
-    return handle[reqUrl.pathname](request);
+    handle[reqUrl.pathname](request, response);
   }
   else {
-    return '404';
+    response.writeHead(404, {'Content-Type': 'text/plain'});
+    response.write('404 Not Found');
+    response.end();
   }
 }
 

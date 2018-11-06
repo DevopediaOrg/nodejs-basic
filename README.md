@@ -69,3 +69,11 @@ Do the following:
 Note that we now return a 404 error for the `favicon.ico` file.
 
 Study the callback code. Which one is a blocking call? Which one is a non-blocking call? Can you explain what's happening?
+
+
+# 5. Passing Response Object to Request Handlers (br0.5)
+
+Response object is passed into the request handlers. Each handler will take care of writing the response. This design allows us to handle non-blocking operations correctly. Their callbacks will have the necessary output to form the response correctly.
+
+Note that server code is extremely simple now. Everything is handled by router and request callbacks.
+

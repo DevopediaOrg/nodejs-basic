@@ -27,7 +27,7 @@ function start(route, handle) {
 
     let postData = '';
     request.setEncoding('utf8');
-    request.on('data', function(chunk) {
+    request.addListener('data', function(chunk) {
       postData += chunk;
     });
     request.addListener('end', function() {

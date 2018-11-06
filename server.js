@@ -1,26 +1,18 @@
 const http = require('http');
-const url = require('url');
 
 const hostname = '127.0.0.1';
 const port = 8888;
 
-function start() {
+function start(route, handle) {
   function onRequest(request, response) {
     console.log(`Request received for URL ${request.url}`);
 
-    const reqUrl = url.parse(request.url, true);
+    const content = route(handle, request);
 
-    // not good to simply return without a response
-    // we'll correct this later
-    if (reqUrl.pathname == '/favicon.ico') return;
-
-    // default to 'World' if no username is given
-    let username;
-    if (reqUrl.query.username === undefined) username = 'World';
-    else username = reqUrl.query.username;
-
-    response.writeHead(200, {'Content-Type': 'text/plain'});
-    response.write(`Hello ${username}`);
+    let statusCode = 200;
+    if (content === '404') statusCode = 404;
+    response.writeHead(statusCode, {'Content-Type': 'text/plain'});
+    response.write(content);
     response.end();
   }
 

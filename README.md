@@ -1,4 +1,4 @@
-# 1. Overview
+# 0. Overview
 
 This is a sample project for beginners who wish to learn Node.js. We will build a small web app. To learn the concepts step by step, we suggest you clone this code repository and checkout relevant checkpoints identified by branch names.
 
@@ -21,13 +21,14 @@ To get a high-level overview of Node.js, read the [Node.js article on Devopedia]
 The rest of this document guides you through the project step by step. To try out code at a particular step, checkout the relevant branch. For example, to checkout code of `br0.1` branch, run command `git checkout br0.1`. Branch names are mentioned in section headers.
 
 
-# 2. Hello World (br0.1)
+# 1. Hello World (br0.1)
 
 Execute this command: `node hello.js`
 
 This doesn't do anything useful except print out a string and exit. While Node usually is an app server listening for client requests, it can also be used to build a standalone program that does something specific and exits normally.
 
-# 3. A Hello World Server (br0.2)
+
+# 2. A Hello World Server (br0.2)
 
 Execute this command: `node server.js`. Access the URL from your browser. Congrats! You now have a Node-based web app running!
 
@@ -38,6 +39,7 @@ It's a good time to get familiar with Node.js documentation. Read about the foll
 * [server.listen()](https://nodejs.org/api/net.html#net_server_listen)
 
 It will be apparent from the documentation that callback functions are the last argument. This is the convention in Node.
+
 
 # 3. Server as a Module (br0.3)
 
@@ -50,3 +52,20 @@ In `server.js`, since the request callback is likely to get more complex, we giv
 This may also be a good time to try out debugging the code in VS Code. There's already a debugging configuration in file `.vscode/launch.json` that you can use.
 
 
+# 4. Setting up the Router (br0.4)
+
+We also have two new files:
+* `router.js`: This routes requests to different callbacks.
+* `requestHandlers.js`: This encapsulates all the request callbacks.
+
+In file `index.js` we map URL paths to their callbacks within a single handler object. Also, we pass both the router and handler to the server. Instead of hard-coding these into the server, we pass them as arguments to the server. In other words, the server is loosely coupled from both the router and the handler. This concept is called [Dependency Injection](https://devopedia.org/dependency-injection).
+
+The router takes the handler and the request as arguments. In fact, router doesn't need the entire request. It needs only the URL path. But the handlers might require the entire request object and hence we pass it along. 
+
+Do the following:
+* Open `http://localhost:8888/list` in a browser tab (don't wait for response)
+* Open `http://localhost:8888` in another browser tab
+
+Note that we now return a 404 error for the `favicon.ico` file.
+
+Study the callback code. Can you explain what's happening? How will you improve the code?

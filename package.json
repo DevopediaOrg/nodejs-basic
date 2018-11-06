@@ -19,5 +19,8 @@
   "homepage": "https://github.com/DevopediaOrg/nodejs-basic#readme",
   "devDependencies": {
     "eslint": "^5.8.0"
+  },
+  "dependencies": {
+    "formidable": "^1.2.1"
   }
 }

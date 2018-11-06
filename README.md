@@ -77,3 +77,29 @@ Response object is passed into the request handlers. Each handler will take care
 
 Note that server code is extremely simple now. Everything is handled by router and request callbacks.
 
+
+# 6. Form with File Upload (br0.6)
+
+We extend the example with a simple form. This form allows a file upload. We make use of `formidable` module. You can install it by running `npm install` since we've already recorded it as a package dependency.
+
+Open homepage, fill the form and submit it. No form validation is done but we will add this later. 
+
+Let's study the code in `server.js`, where the file upload is handled. What happens if you remove the `return` statement? What happens if we handle file upload error by adding this line:
+```
+if (error) throw error;
+```
+
+Instead of throwing the error, what happens if we do this:
+```
+if (error) {
+  console.log(error.message);
+  return;
+}
+```
+
+If you prefer a more modern syntax, the `request.addListener()` code in `server.js` can be rewritten as follows:
+```
+request
+  .on('data', (chunk) => postData += chunk)
+  .on('end', () => route(handle, request, response, postData));
+```

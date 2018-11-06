@@ -28,6 +28,7 @@ function start(route, handle) {
     let postData = '';
     request.setEncoding('utf8');
     request.addListener('data', function(chunk) {
+      console.log('Receiving a chunk');
       postData += chunk;
     });
     request.addListener('end', function() {

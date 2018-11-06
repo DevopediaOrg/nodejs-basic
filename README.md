@@ -68,4 +68,4 @@ Do the following:
 
 Note that we now return a 404 error for the `favicon.ico` file.
 
-Study the callback code. Can you explain what's happening? How will you improve the code?
+Study the callback code. Which one is a blocking call? Which one is a non-blocking call? Can you explain what's happening?

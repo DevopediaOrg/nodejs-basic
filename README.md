@@ -80,7 +80,7 @@ Note that server code is extremely simple now. Everything is handled by router a
 
 # 6. Form with File Upload (br0.6)
 
-We extend the example with a simple form. This form allows a file upload. We make use of `formidable` module. You can install it by running `npm install` since we've already recorded it as a package dependency.
+We extend the example with a simple form. This form allows a file upload. We make use of `formidable` module. You can install it by running `npm install` since we've already recorded it as a package dependency. To learn more, visit the [Dependency Manager](https://devopedia.org/dependency-manager) article on Devopedia.
 
 Open homepage, fill the form and submit it. No form validation is done but we will add this later. 
 

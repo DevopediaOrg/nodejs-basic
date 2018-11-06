@@ -12,10 +12,10 @@ function start(route, handle) {
 
     if (request.url == '/upload' && request.method.toLowerCase() == 'post') {
       // parse a file upload
-      var form = new formidable.IncomingForm();
+      const form = new formidable.IncomingForm();
       form.parse(request, function(error, fields, files) {
-        var oldpath = files.upload.path;
-        var newpath = 'static/profiles/' + files.upload.name;
+        const oldpath = files.upload.path;
+        const newpath = 'static/profiles/' + files.upload.name;
         fs.rename(oldpath, newpath, function () {
           response.writeHead(200, {'Content-Type': 'text/plain'});
           response.write('Your upload:\n');

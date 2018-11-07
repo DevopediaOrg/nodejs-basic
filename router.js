@@ -1,4 +1,5 @@
 const url = require('url');
+const appStatic = require('./static');
 
 function route(handle, request, response) {
   const reqUrl = url.parse(request.url, true);
@@ -6,10 +7,12 @@ function route(handle, request, response) {
   if (typeof handle[reqUrl.pathname] === 'function') {
     handle[reqUrl.pathname](request, response);
   }
+  else if (reqUrl.pathname === '/favicon.ico' || 
+           appStatic.staticFileExists(reqUrl.pathname)) {
+    appStatic.serveStaticFile(reqUrl.pathname, response);
+  }
   else {
-    response.writeHead(404, {'Content-Type': 'text/plain'});
-    response.write('404 Not Found');
-    response.end();
+    appStatic.serveStaticFile('html/404.htm', response);
   }
 }
 

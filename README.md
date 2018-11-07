@@ -110,3 +110,12 @@ request
 We refactor the code so that file upload is now done inside the handler. We remove some redundant code used earlier just for learning purpose. We no longer need `postData` variable. We send back the response after the form is fully received but before the uploaded file is renamed.
 
 We do input validation on the form at server side. For this purpose we use `node-input-validator` module. Install it as usual by executing `npm install`. Study the [documentation of node-input-validator](https://github.com/artisangang/node-input-validator). Notice how we reuse code in `getFormBody()`.
+
+
+# 8. Serving Static Files (br0.8)
+
+While there are third-party modules to serve static file, we'll use `fs` module to do this. Install `mime-types` module by running `npm install`.
+
+Let's serve all static files from `static` folder. File `favicon.ico` is added to the subfolder `static/images` although the corresponding request will be for `/favicon.ico`. Our router will do the routing as needed.
+
+We've also added a fancy 404 error page. Credit for this code goes to [Vineeth TR](https://codepen.io/vineethtr/pen/NRzNLz).

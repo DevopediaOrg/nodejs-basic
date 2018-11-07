@@ -129,3 +129,8 @@ When we serve the form on homepage, the form HTML was earlier part of `requestHa
 * **Controller**: This routes the requests from clients to suitable models for processing. File `router.js` is doing this in our app.
 
 We've refactored the code to follow MVC pattern. We now have a view to serve the form. This view is also making use of [Handlebars](https://handlebarsjs.com/) as the templating engine. To install `handlebars`, run `npm install`. Study the form code that now uses Handlebars.
+
+
+# 10. Logging (br0.10)
+
+We've been logging requests to the console but let's log them to a file. [Winston](https://github.com/winstonjs/winston#logging-levels) is what we'll use for this. To install `winston`, run `npm install`. 

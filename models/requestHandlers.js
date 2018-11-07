@@ -4,6 +4,7 @@ const fs = require('fs');
 const formidable = require('formidable');
 const validator = require('node-input-validator');
 const exec = require('child_process').exec;
+const logger = require('../lib/logger');
 const appUtils = require('../lib/utils');
 
 function home(request, response) {
@@ -24,7 +25,7 @@ function upload(request, response) {
   const form = new formidable.IncomingForm();
   form.parse(request, function(error, fields, files) {
     if (error) {
-      console.log(error.message);
+      logger.error(error.message);
       return;
     }
 
@@ -51,9 +52,9 @@ function upload(request, response) {
       // file upload is optional
       if (files.upload.name) {
         var oldpath = files.upload.path;
-        var newpath = 'static/profiles/' + files.upload.name;
+        var newpath = 'statixc/profiles/' + files.upload.name;
         fs.rename(oldpath, newpath, function (error) {
-          if (error) console.log(error.message);
+          if (error) logger.error(error.message);
         });  
       }
 

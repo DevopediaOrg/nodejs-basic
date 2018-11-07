@@ -143,6 +143,7 @@ You're on your way towards mastering Node.js! In this project, you've learned th
 * Sending GET data and parsing the query string
 * Sending POST form data with file upload
 * Validating input at the server side
+* Serving static content
 * Implementing MVC pattern with Node
 * Templating the views
 * Logging for housekeeping and debugging

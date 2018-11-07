@@ -105,6 +105,8 @@ request
 ```
 
 
-# 7. Refactor File Upload Code (br0.7)
+# 7. Refactor File Upload Code & Input Validation (br0.7)
 
 We refactor the code so that file upload is now done inside the handler. We remove some redundant code used earlier just for learning purpose. We no longer need `postData` variable. We send back the response after the form is fully received but before the uploaded file is renamed.
+
+We do input validation on the form at server side. For this purpose we use `node-input-validator` module. Install it as usual by executing `npm install`. Study the [documentation of node-input-validator](https://github.com/artisangang/node-input-validator). Notice how we reuse code in `getFormBody()`.

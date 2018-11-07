@@ -2,24 +2,27 @@ const url = require('url');
 const util = require('util');
 const fs = require('fs');
 const formidable = require('formidable');
+const validator = require('node-input-validator');
 const exec = require('child_process').exec;
 
-function home(request, response) {
-  const reqUrl = url.parse(request.url, true);
+function getFormBody(greeting='World', errors=null) {
+  if (errors === null || errors === undefined) errors = [];
 
-  // default to 'World' if no username is given
-  let username;
-  if (reqUrl.query.username === undefined) username = 'World';
-  else username = reqUrl.query.username;
-
-  const body = '<html>'+
+  let body = '<html>'+
   '<head>'+
   '<meta http-equiv="Content-Type" content="text/html; '+
   'charset=UTF-8" />'+
   '</head>'+
-  '<body><h1>'+`Hello ${username}`+'</h1><hr>'+
-  '<form action="/upload" method="post" enctype="multipart/form-data">'+
+  '<body><h1>'+`Hello ${greeting}`+'</h1><hr>';
+
+  if (errors.length) {
+    body += '<div><em>'+errors.join('<br>')+'</em></div><hr>';
+  }
+
+  body += '<form action="/upload" method="post" enctype="multipart/form-data">'+
   '<div><p>Name<br><input name="name" type="text"></div>'+
+  '<div><p>Email<br><input name="email" type="text"></div>'+
+  '<div><p>Password<br><input name="password" type="password"></div>'+
   '<div><p>Age<br><input name="age" type="text"></div>'+
   '<div><p>Sex<br>'+
   '<input name="sex" type="radio" value="Male" checked> Male<br>'+
@@ -31,6 +34,14 @@ function home(request, response) {
   '</form>'+
   '</body>'+
   '</html>';
+
+  return body;
+}
+
+function home(request, response) {
+  const reqUrl = url.parse(request.url, true);
+
+  const body = getFormBody(reqUrl.query.username);
 
   response.writeHead(200, {'Content-Type': 'text/html'});
   response.write(body);
@@ -54,16 +65,43 @@ function upload(request, response) {
       return;
     }
 
-    // rename and save in static folder
-    var oldpath = files.upload.path;
-    var newpath = 'static/profiles/' + files.upload.name;
-    fs.rename(oldpath, newpath, function (error) {
-      if (error) console.log(error.message);
+    let v = new validator(fields, {
+      name: 'required|maxLength:50',
+      email: 'required|email',
+      password: 'required|minLength:8',
+      age: 'required|integer|min:0'
     });
 
-    response.writeHead(200, {'Content-Type': 'text/plain'});
-    response.write('Your upload:\n');
-    response.end(util.inspect({fields: fields, files: files}));
+    v.check().then(function(matched) {
+      if (!matched) {
+        const errors = [];
+        Object.keys(v.errors).forEach((key) => {
+          errors.push(v.errors[key].message);
+        });
+
+        const reqUrl = url.parse(request.url, true);
+        const body = getFormBody(reqUrl.query.username, errors);
+
+        response.writeHead(422, {'Content-Type': 'text/html'});
+        response.write(body);
+        response.end();
+        return;
+      }
+
+      // rename and save in static folder
+      // file upload is optional
+      if (files.upload.name) {
+        var oldpath = files.upload.path;
+        var newpath = 'static/profiles/' + files.upload.name;
+        fs.rename(oldpath, newpath, function (error) {
+          if (error) console.log(error.message);
+        });  
+      }
+
+      response.writeHead(200, {'Content-Type': 'text/plain'});
+      response.write('Your upload:\n');
+      response.end(util.inspect({fields: fields, files: files}));
+    });
   });
 }
 

@@ -151,6 +151,12 @@ You're on your way towards mastering Node.js! In this project, you've learned th
 * Using built-in modules: http, url, fs, util, child_process
 * Using third-party modules: formidable, handlebars, mime-types, node-input-validator, winston
 
+You can read more about important Node modules or classes commonly used in a web app:
+* [http.Server](https://nodejs.org/api/http.html#http_class_http_server): Implements the server.
+* [http.ClientRequest](https://nodejs.org/api/http.html#http_class_http_clientrequest): Inherits from [Stream](https://nodejs.org/api/stream.html) class.
+* [http.ServerResponse](https://nodejs.org/api/http.html#http_class_http_serverresponse): Inherits from [Stream](https://nodejs.org/api/stream.html) class.
+* [querystring](https://nodejs.org/api/querystring.html): Module for parsing and formatting URL query strings. If you're dealing with standard URLs, [URLSearchParams](https://nodejs.org/api/url.html#url_class_urlsearchparams) class is a simpler option.
+
 Here are some suggestions to improve this app on your own:
 * Save user form data into a database such as SQLite. Use a model to access user data from database.
 * Change homepage to include signup or login/logout options. Create two views: one for signup form and another for login form.

@@ -121,7 +121,7 @@ Let's serve all static files from `static` folder. File `favicon.ico` is added t
 We've also added a fancy 404 error page. Credit for this code goes to [Vineeth TR](https://codepen.io/vineethtr/pen/NRzNLz).
 
 
-# 9. Model-View-Controller (br0.9)
+# 9. Model-View-Controller & Handlebars (br0.9)
 
 When we serve the form on homepage, the form HTML was earlier part of `requestHandlers.js`, which also has the main logic for processing each request. It's good practice to separate the business logic from the response sent to clients. Traditionally, a basic design for a web app has three parts, called **MVC**:
 * **Model**: This is where the business logic resides. Often this relates to data but in our app we're not storing anything at the moment. Our model is simply `requestHandlers.js`.

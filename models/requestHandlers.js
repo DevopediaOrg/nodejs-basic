@@ -4,7 +4,7 @@ const fs = require('fs');
 const formidable = require('formidable');
 const validator = require('node-input-validator');
 const exec = require('child_process').exec;
-const appUtils = require('./utils');
+const appUtils = require('../lib/utils');
 
 function home(request, response) {
   const reqUrl = url.parse(request.url, true);

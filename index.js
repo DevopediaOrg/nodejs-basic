@@ -1,6 +1,6 @@
-const server = require('./server');
-const router = require('./router');
-const requestHandlers = require('./requestHandlers');
+const server = require('./lib/server');
+const router = require('./controllers/router');
+const requestHandlers = require('./models/requestHandlers');
 
 const handle = {};
 handle['/'] = requestHandlers.home;

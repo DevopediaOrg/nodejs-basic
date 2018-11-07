@@ -1,5 +1,5 @@
 const url = require('url');
-const appStatic = require('./static');
+const appStatic = require('../lib/static');
 
 function route(handle, request, response) {
   const reqUrl = url.parse(request.url, true);

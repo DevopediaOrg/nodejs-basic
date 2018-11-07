@@ -134,3 +134,27 @@ We've refactored the code to follow MVC pattern. We now have a view to serve the
 # 10. Logging (br0.10)
 
 We've been logging requests to the console but let's log them to a file. [Winston](https://github.com/winstonjs/winston#logging-levels) is what we'll use for this. To install `winston`, run `npm install`. 
+
+
+# 11. Completing the App (br0.11)
+
+You're on your way towards mastering Node.js! In this project, you've learned the following:
+* Handling request and response Node objects
+* Sending GET data and parsing the query string
+* Sending POST form data with file upload
+* Validating input at the server side
+* Implementing MVC pattern with Node
+* Templating the views
+* Logging for housekeeping and debugging
+* Debugging your app in VS Code
+* Using built-in modules: http, url, fs, util, child_process
+* Using third-party modules: formidable, handlebars, mime-types, node-input-validator, winston
+
+Here are some suggestions to improve this app on your own:
+* Save user form data into a database such as SQLite. Use a model to access user data from database.
+* Change homepage to include signup or login/logout options. Create two views: one for signup form and another for login form.
+* Use client-side JavaScript to validate forms. Also validate password on signup form via a "Confirm Password" field.
+* To manage user sessions for logged in users, you will need to make use of cookies. Learn how to do this.
+* If logged in, user should see his/her details. If logged in, user can see details of all other registered users.
+* Use AJAX to show in real time how many users are currently logged in on the server.
+* Add CSS/JS to beautify the look and feel of the pages.

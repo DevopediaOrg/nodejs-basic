@@ -119,3 +119,13 @@ While there are third-party modules to serve static file, we'll use `fs` module 
 Let's serve all static files from `static` folder. File `favicon.ico` is added to the subfolder `static/images` although the corresponding request will be for `/favicon.ico`. Our router will do the routing as needed.
 
 We've also added a fancy 404 error page. Credit for this code goes to [Vineeth TR](https://codepen.io/vineethtr/pen/NRzNLz).
+
+
+# 9. Model-View-Controller (br0.9)
+
+When we serve the form on homepage, the form HTML was earlier part of `requestHandlers.js`, which also has the main logic for processing each request. It's good practice to separate the business logic from the response sent to clients. Traditionally, a basic design for a web app has three parts, called **MVC**:
+* **Model**: This is where the business logic resides. Often this relates to data but in our app we're not storing anything at the moment. Our model is simply `requestHandlers.js`.
+* **View**: This contains the structure of what's sent in response to client requests. Our views are in folder `/views`.
+* **Controller**: This routes the requests from clients to suitable models for processing. File `router.js` is doing this in our app.
+
+We've refactored the code to follow MVC pattern. We now have a view to serve the form. This view is also making use of [Handlebars](https://handlebarsjs.com/) as the templating engine. To install `handlebars`, run `npm install`. Study the form code that now uses Handlebars.

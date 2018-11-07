@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "formidable": "^1.2.1",
+    "handlebars": "^4.0.12",
     "mime-types": "^2.1.21",
     "node-input-validator": "^2.3.2"
   }

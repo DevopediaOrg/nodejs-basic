@@ -1,11 +1,13 @@
 const server = require('./lib/server');
 const router = require('./controllers/router');
-const requestHandlers = require('./models/requestHandlers');
+const {home} = require('./models/home');
+const {list} = require('./models/list');
+const {upload} = require('./models/upload');
 
 const handle = {};
-handle['/'] = requestHandlers.home;
-handle['/home'] = requestHandlers.home;
-handle['/list'] = requestHandlers.list;
-handle['/upload'] = requestHandlers.upload;
+handle['/'] = home;
+handle['/home'] = home;
+handle['/list'] = list;
+handle['/upload'] = upload;
 
 server.start(router.route, handle);

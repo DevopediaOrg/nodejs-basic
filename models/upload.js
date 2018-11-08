@@ -3,21 +3,7 @@ const util = require('util');
 const fs = require('fs');
 const formidable = require('formidable');
 const validator = require('node-input-validator');
-const exec = require('child_process').exec;
 const appUtils = require('../lib/utils');
-
-function home(request, response) {
-  const reqUrl = url.parse(request.url, true);
-  appUtils.serveUserForm(response, 200, reqUrl.query.username);
-}
-
-function list(request, response) {
-  exec('ls -lah', function (error, stdout) {
-    response.writeHead(200, {'Content-Type': 'text/plain'});
-    response.write(stdout);
-    response.end();
-  });
-}
 
 function upload(request, response) {
   // parse a file upload
@@ -64,6 +50,5 @@ function upload(request, response) {
   });
 }
 
-exports.home = home;
-exports.list = list;
 exports.upload = upload;
+

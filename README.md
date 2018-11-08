@@ -124,7 +124,7 @@ We've also added a fancy 404 error page. Credit for this code goes to [Vineeth T
 # 9. Model-View-Controller & Handlebars (br0.9)
 
 When we serve the form on homepage, the form HTML was earlier part of `requestHandlers.js`, which also has the main logic for processing each request. It's good practice to separate the business logic from the response sent to clients. Traditionally, a basic design for a web app has three parts, called **MVC**:
-* **Model**: This is where the business logic resides. Often this relates to data but in our app we're not storing anything at the moment. Our model was previously simply `requestHandlers.js`. We've now split this into three files, stored in folder `models/`
+* **Model**: This is where the business logic resides. Often this relates to data but in our app we're not storing anything at the moment. Our model was previously simply `requestHandlers.js`. We've now split this into three files, stored in folder `models/`.
 * **View**: This contains the structure of what's sent in response to client requests. Our views are in folder `views/`.
 * **Controller**: This routes the requests from clients to suitable models for processing. File `router.js` is doing this in our app.
 

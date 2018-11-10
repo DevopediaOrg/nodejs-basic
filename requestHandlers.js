@@ -36,7 +36,10 @@ function home(request, response) {
 }
 
 function list(request, response) {
-  exec('ls -lah', function (error, stdout) {
+  let cmd;
+  if (process.platform === 'win32') cmd = 'dir';
+  else cmd = 'ls -lah';
+  exec(cmd, function (error, stdout) {
     response.writeHead(200, {'Content-Type': 'text/plain'});
     response.write(stdout);
     response.end();

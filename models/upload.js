@@ -38,7 +38,7 @@ function upload(request, response) {
       // file upload is optional
       if (files.upload.name) {
         var oldpath = files.upload.path;
-        var newpath = 'statixc/profiles/' + files.upload.name;
+        var newpath = 'static/profiles/' + files.upload.name;
         fs.rename(oldpath, newpath, function (error) {
           if (error) logger.error(error.message);
         });  

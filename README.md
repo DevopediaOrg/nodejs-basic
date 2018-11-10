@@ -27,10 +27,13 @@ Execute this command: `node hello.js`
 
 This doesn't do anything useful except print out a string and exit. While Node usually is an app server listening for client requests, it can also be used to build a standalone program that does something specific and exits normally.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> br0.3
 # 2. A Hello World Server (br0.2)
 
-Execute this command: `node server.js`. Access the URL from your browser. Congrats! You now have a Node-based web app running!
+Execute this command: `node server.js`. Access the URL `http://localhost:8888` from your browser. Congrats! You now have a Node-based web app running!
 
 Open the file `server.js` in VS Code. It's important to follow style conventions and use a suitable linting tool to catch errors early. [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) is a popular resource. ESLint is a useful tool for linting. ESLint is already configured in file `.eslintrc.js`. To install ESLint for our project, execute this command `npm install`. You will now notice that VS Code will highlight syntax/style errors (if any).
 

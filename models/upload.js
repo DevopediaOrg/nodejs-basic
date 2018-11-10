@@ -36,8 +36,8 @@ function upload(request, response) {
       // rename and save in static folder
       // file upload is optional
       if (files.upload.name) {
-        var oldpath = files.upload.path;
-        var newpath = 'static/profiles/' + files.upload.name;
+        const oldpath = files.upload.path;
+        const newpath = 'static/profiles/' + files.upload.name;
         fs.rename(oldpath, newpath, function (error) {
           if (error) console.log(error.message);
         });  

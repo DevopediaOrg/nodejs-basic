@@ -30,7 +30,7 @@ This doesn't do anything useful except print out a string and exit. While Node u
 
 # 2. A Hello World Server (br0.2)
 
-Execute this command: `node server.js`. Access the URL from your browser. Congrats! You now have a Node-based web app running!
+Execute this command: `node server.js`. Access the URL `http://localhost:8888` from your browser. Congrats! You now have a Node-based web app running!
 
 Open the file `server.js` in VS Code. It's important to follow style conventions and use a suitable linting tool to catch errors early. [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) is a popular resource. ESLint is a useful tool for linting. ESLint is already configured in file `.eslintrc.js`. To install ESLint for our project, execute this command `npm install`. You will now notice that VS Code will highlight syntax/style errors (if any).
 
@@ -84,14 +84,25 @@ We extend the example with a simple form. This form allows a file upload. We mak
 
 Open homepage, fill the form and submit it. No form validation is done but we will add this later. 
 
-Let's study the code in `server.js`, where the file upload is handled. What happens if you remove the `return` statement? What happens if we handle file upload error by adding this line:
+Let's study the code in `server.js`, where the file upload is handled. What happens if you remove the `return` statement? What happens if we handle file upload error (assume an error) by adding this line:
 ```
-if (error) throw error;
+throw error;
 ```
+
+What happens if we catch the above exception using a `try-catch` block in `index.js`:
+```
+try {
+  server.start(router.route, handle);  
+} catch (error) {
+  console.error(error);
+}
+```
+
+In general, throwing exceptions to the event loop is not recommended. Learn more about [uncaught exceptions](https://nodejs.org/docs/latest/api/process.html#process_event_uncaughtexception) in the documentation. Instead, use the `On Error Resume Next` pattern.
 
 Instead of throwing the error, what happens if we do this:
 ```
-if (error) {
+if (true) {
   console.log(error.message);
   return;
 }
@@ -119,6 +130,8 @@ While there are third-party modules to serve static file, we'll use `fs` module 
 Let's serve all static files from `static` folder. File `favicon.ico` is added to the subfolder `static/images` although the corresponding request will be for `/favicon.ico`. Our router will do the routing as needed.
 
 We've also added a fancy 404 error page. Credit for this code goes to [Vineeth TR](https://codepen.io/vineethtr/pen/NRzNLz).
+
+Visitors cannot directly access your code files. For example, try accessing `http://localhost:8888/index.js` and see what happens.
 
 
 # 9. Model-View-Controller & Handlebars (br0.9)

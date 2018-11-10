@@ -27,10 +27,7 @@ Execute this command: `node hello.js`
 
 This doesn't do anything useful except print out a string and exit. While Node usually is an app server listening for client requests, it can also be used to build a standalone program that does something specific and exits normally.
 
-<<<<<<< HEAD
 
-=======
->>>>>>> br0.3
 # 2. A Hello World Server (br0.2)
 
 Execute this command: `node server.js`. Access the URL `http://localhost:8888` from your browser. Congrats! You now have a Node-based web app running!

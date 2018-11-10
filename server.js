@@ -3,7 +3,7 @@ const util = require('util');
 const fs = require('fs');
 const formidable = require('formidable');
 
-const hostname = '127.0.0.1';
+const hostname = 'localhost';
 const port = 8888;
 
 function start(route, handle) {

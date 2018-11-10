@@ -49,7 +49,10 @@ function home(request, response) {
 }
 
 function list(request, response) {
-  exec('ls -lah', function (error, stdout) {
+  let cmd;
+  if (process.platform === 'win32') cmd = 'dir';
+  else cmd = 'ls -lah';
+  exec(cmd, function (error, stdout) {
     response.writeHead(200, {'Content-Type': 'text/plain'});
     response.write(stdout);
     response.end();
@@ -91,8 +94,8 @@ function upload(request, response) {
       // rename and save in static folder
       // file upload is optional
       if (files.upload.name) {
-        var oldpath = files.upload.path;
-        var newpath = 'static/profiles/' + files.upload.name;
+        const oldpath = files.upload.path;
+        const newpath = 'static/profiles/' + files.upload.name;
         fs.rename(oldpath, newpath, function (error) {
           if (error) console.log(error.message);
         });  

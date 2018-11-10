@@ -22,7 +22,10 @@ function list() {
 
   msleep(10000);
 
-  exec('ls -lah', function (error, stdout) {
+  let cmd;
+  if (process.platform === 'win32') cmd = 'dir';
+  else cmd = 'ls -lah';
+  exec(cmd, function (error, stdout) {
     content = stdout;
   });
 

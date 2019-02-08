@@ -146,6 +146,6 @@ While there are third-party modules to serve static file, we'll use `fs` module 
 
 Let's serve all static files from `static` folder. File `favicon.ico` is added to the subfolder `static/images` although the corresponding request will be for `/favicon.ico`. Our router will do the routing as needed.
 
-We've also added a fancy 404 error page. Credit for this code goes to [Vineeth TR](https://codepen.io/vineethtr/pen/NRzNLz).
+We've also added a fancy 404 error page. Credit for this code goes to [Vineeth TR](https://codepen.io/vineethtr/pen/NRzNLz). Note that 404 error page is served in two places: if we get an unsupported URL path or if a requested static file is missing.
 
 Visitors cannot directly access your code files. For example, try accessing `http://localhost:8888/index.js` and see what happens.

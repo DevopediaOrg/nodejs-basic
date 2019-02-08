@@ -18,7 +18,7 @@ code -v
 
 To get a high-level overview of Node.js, read the [Node.js](https://devopedia.org/node-js) article on Devopedia.
 
-The rest of this document guides you through the project step by step. To try out code at a particular step, checkout the relevant branch. For example, to checkout code of `br0.1` branch, run command `git checkout br0.1`. Branch names are mentioned in section headers. With the command `git branch -v` you can list all branches.
+The rest of this document guides you through the project step by step. To try out code at a particular step, checkout the relevant branch. For example, to checkout code of `br0.1` branch, run command `git checkout br0.1`. Branch names are mentioned in section headers. With the command `git branch -a` you can list all branches.
 
 
 # 1. Hello World (br0.1)
@@ -26,6 +26,13 @@ The rest of this document guides you through the project step by step. To try ou
 Execute this command: `node hello.js`
 
 This doesn't do anything useful except print out a string and exit. While Node usually is an app server listening for client requests, it can also be used to build a standalone program that does something specific and exits normally.
+
+The file `hello.js` has a single line of code. Small code snippets can be executed directly on the command line using the `-e` option: `node -e "console.log('Hello World!')"`
+
+Official documentation explains all the [command-line options](https://nodejs.org/api/cli.html#cli_command_line_options).
+
+The same single line code can be executed within the developer console of a web browser. Like a web browser, Node.js provides a JavaScript runtime but for server-side execution.
+
 
 # 2. A Hello World Server (br0.2)
 
@@ -38,6 +45,11 @@ It's a good time to get familiar with Node.js documentation. Read about the foll
 * [server.listen()](https://nodejs.org/api/net.html#net_server_listen)
 
 It will be apparent from the documentation that callback functions are the last argument. This is the convention in Node.
+
+Here are a couple of questions to think about (for JS beginners):
+* Why is "Server running ..." printed only once on the console?
+* Why is "Request received ..." printed with every client request?
+
 
 # 3. Server as a Module (br0.3)
 

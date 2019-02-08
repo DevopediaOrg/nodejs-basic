@@ -4,6 +4,7 @@ const fs = require('fs');
 const formidable = require('formidable');
 const validator = require('node-input-validator');
 const exec = require('child_process').exec;
+const appUtils = require('./utils');
 
 function getFormBody(greeting='World', errors=null) {
   if (errors === null || errors === undefined) errors = [];
@@ -43,9 +44,7 @@ function home(request, response) {
 
   const body = getFormBody(reqUrl.query.username);
 
-  response.writeHead(200, {'Content-Type': 'text/html'});
-  response.write(body);
-  response.end();
+  appUtils.serveDefault(response, 'text/html', body);
 }
 
 function list(request, response) {
@@ -53,9 +52,7 @@ function list(request, response) {
   if (process.platform === 'win32') cmd = 'dir';
   else cmd = 'ls -lah';
   exec(cmd, function (error, stdout) {
-    response.writeHead(200, {'Content-Type': 'text/plain'});
-    response.write(stdout);
-    response.end();
+    appUtils.serveDefault(response, 'text/plain', stdout);
   });
 }
 
@@ -101,9 +98,9 @@ function upload(request, response) {
         });  
       }
 
-      response.writeHead(200, {'Content-Type': 'text/plain'});
-      response.write('Your upload:\n');
-      response.end(util.inspect({fields: fields, files: files}));
+      appUtils.serveDefault(response, 'text/plain',
+        `Your upload:
+        ${util.inspect({fields: fields, files: files})}`);
     });
   });
 }

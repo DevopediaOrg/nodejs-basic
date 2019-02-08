@@ -96,7 +96,9 @@ We extend the example with a simple form. This form allows a file upload. We mak
 
 Open homepage, fill the form and submit it. No form validation is done but we will add this later. 
 
-Let's study the code in `server.js`, where the file upload is handled. What happens if you remove the `return` statement? What happens if we handle file upload error (assume an error) by adding this line:
+Let's study the code in `server.js`, where the file upload is handled. Data from the client is received by `stream.Readable` object. When a chunk of data is ready to be consumed from the stream, `data` event is emitted. When data has been fully consumed from the stream, `end` event is emitted. Read the documentation for [stream.Readable](https://nodejs.org/api/stream.html#stream_class_stream_readable) more information.
+
+Why are we not getting "Receiving a chunk ..." prints on the console? What happens if you comment the `return` statement? If your POST data is large, how many chunks do you see and what's the approximate maximum size of each chunk? What happens if we handle file upload/save error by adding this line:
 ```
 throw error;
 ```
@@ -110,11 +112,11 @@ try {
 }
 ```
 
-In general, throwing exceptions to the event loop is not recommended. Learn more about [uncaught exceptions](https://nodejs.org/docs/latest/api/process.html#process_event_uncaughtexception) in the documentation. Instead, use the `On Error Resume Next` pattern.
+In general, throwing exceptions to the event loop is not recommended. Errors that happen within asynchronous callbacks cannot be thrown and caught in a synchronous way. Learn more about [uncaught exceptions](https://nodejs.org/docs/latest/api/process.html#process_event_uncaughtexception) in the documentation. Instead, use the `On Error Resume Next` pattern.
 
-Instead of throwing the error, what happens if we do this:
+Instead of throwing the error, what happens if we do this (keep the `return` statement commented):
 ```
-if (true) {
+if (error) {
   console.log(error.message);
   return;
 }
@@ -126,3 +128,6 @@ request
   .on('data', (chunk) => postData += chunk)
   .on('end', () => route(handle, request, response, postData));
 ```
+
+For more information, read this guide titled [Anatomy of an HTTP Transaction
+](https://nodejs.org/en/docs/guides/anatomy-of-an-http-transaction/).

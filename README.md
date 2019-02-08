@@ -26,3 +26,9 @@ The rest of this document guides you through the project step by step. To try ou
 Execute this command: `node hello.js`
 
 This doesn't do anything useful except print out a string and exit. While Node usually is an app server listening for client requests, it can also be used to build a standalone program that does something specific and exits normally.
+
+The file `hello.js` has a single line of code. Small code snippets can be executed directly on the command line using the `-e` option: `node -e "console.log('Hello World!')"`
+
+Official documentation explains all the [command-line options](https://nodejs.org/api/cli.html#cli_command_line_options).
+
+The same single line code can be executed within the developer console of a web browser. Like a web browser, Node.js provides a JavaScript runtime but for server-side execution.

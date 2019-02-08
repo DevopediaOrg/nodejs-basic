@@ -59,4 +59,6 @@ Try out the following URLs in browser: `http://localhost:8888` and `http://local
 
 In `server.js`, since the request callback is likely to get more complex, we give it a name `onRequest()` and then pass it to the server. We use `url` module to extract parts of the query string. This is a legacy module: there's also `URL` class as an alternative. See [URL API docs](https://nodejs.org/api/url.html) for more information.
 
+What happens if the request is `http://localhost:8888?username=Johnny&username=Kate`? Does the response make sense?
+
 This may also be a good time to try out debugging the code in VS Code. There's already a debugging configuration in file `.vscode/launch.json` that you can use.

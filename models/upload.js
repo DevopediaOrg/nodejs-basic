@@ -44,9 +44,9 @@ function upload(request, response) {
         });  
       }
 
-      response.writeHead(200, {'Content-Type': 'text/plain'});
-      response.write('Your upload:\n');
-      response.end(util.inspect({fields: fields, files: files}));
+      appUtils.serveDefault(response, 'text/plain',
+        `Your upload:
+        ${util.inspect({fields: fields, files: files})}`);
     });
   });
 }

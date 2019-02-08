@@ -18,5 +18,5 @@ code -v
 
 To get a high-level overview of Node.js, read the [Node.js](https://devopedia.org/node-js) article on Devopedia.
 
-The rest of this document guides you through the project step by step. To try out code at a particular step, checkout the relevant branch. For example, to checkout code of `br0.1` branch, run command `git checkout br0.1`. Branch names are mentioned in section headers.
+The rest of this document guides you through the project step by step. To try out code at a particular step, checkout the relevant branch. For example, to checkout code of `br0.1` branch, run command `git checkout br0.1`. Branch names are mentioned in section headers. With the command `git branch -v` you can list all branches.
 

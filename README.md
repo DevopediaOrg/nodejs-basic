@@ -18,7 +18,7 @@ code -v
 
 To get a high-level overview of Node.js, read the [Node.js](https://devopedia.org/node-js) article on Devopedia.
 
-The rest of this document guides you through the project step by step. To try out code at a particular step, checkout the relevant branch. For example, to checkout code of `br0.1` branch, run command `git checkout br0.1`. Branch names are mentioned in section headers. With the command `git branch -v` you can list all branches.
+The rest of this document guides you through the project step by step. To try out code at a particular step, checkout the relevant branch. For example, to checkout code of `br0.1` branch, run command `git checkout br0.1`. Branch names are mentioned in section headers. With the command `git branch -a` you can list all branches.
 
 
 # 1. Hello World (br0.1)
@@ -26,6 +26,12 @@ The rest of this document guides you through the project step by step. To try ou
 Execute this command: `node hello.js`
 
 This doesn't do anything useful except print out a string and exit. While Node usually is an app server listening for client requests, it can also be used to build a standalone program that does something specific and exits normally.
+
+The file `hello.js` has a single line of code. Small code snippets can be executed directly on the command line using the `-e` option: `node -e "console.log('Hello World!')"`
+
+Official documentation explains all the [command-line options](https://nodejs.org/api/cli.html#cli_command_line_options).
+
+The same single line code can be executed within the developer console of a web browser. Like a web browser, Node.js provides a JavaScript runtime but for server-side execution.
 
 
 # 2. A Hello World Server (br0.2)
@@ -40,6 +46,10 @@ It's a good time to get familiar with Node.js documentation. Read about the foll
 
 It will be apparent from the documentation that callback functions are the last argument. This is the convention in Node.
 
+Here are a couple of questions to think about (for JS beginners):
+* Why is "Server running ..." printed only once on the console?
+* Why is "Request received ..." printed with every client request?
+
 
 # 3. Server as a Module (br0.3)
 
@@ -49,12 +59,14 @@ Try out the following URLs in browser: `http://localhost:8888` and `http://local
 
 In `server.js`, since the request callback is likely to get more complex, we give it a name `onRequest()` and then pass it to the server. We use `url` module to extract parts of the query string. This is a legacy module: there's also `URL` class as an alternative. See [URL API docs](https://nodejs.org/api/url.html) for more information.
 
+What happens if the request is `http://localhost:8888?username=Johnny&username=Kate`? Does the response make sense?
+
 This may also be a good time to try out debugging the code in VS Code. There's already a debugging configuration in file `.vscode/launch.json` that you can use.
 
 
 # 4. Setting up the Router (br0.4)
 
-We also have two new files:
+We have two new files:
 * `router.js`: This routes requests to different callbacks.
 * `requestHandlers.js`: This encapsulates all the request callbacks.
 
@@ -84,7 +96,9 @@ We extend the example with a simple form. This form allows a file upload. We mak
 
 Open homepage, fill the form and submit it. No form validation is done but we will add this later. 
 
-Let's study the code in `server.js`, where the file upload is handled. What happens if you remove the `return` statement? What happens if we handle file upload error (assume an error) by adding this line:
+Let's study the code in `server.js`, where the file upload is handled. Data from the client is received by `stream.Readable` object. When a chunk of data is ready to be consumed from the stream, `data` event is emitted. When data has been fully consumed from the stream, `end` event is emitted. Read the documentation for [stream.Readable](https://nodejs.org/api/stream.html#stream_class_stream_readable) more information.
+
+Why are we not getting "Receiving a chunk ..." prints on the console? What happens if you comment the `return` statement? If your POST data is large, how many chunks do you see and what's the approximate maximum size of each chunk? What happens if we handle file upload/save error by adding this line:
 ```
 throw error;
 ```
@@ -98,11 +112,11 @@ try {
 }
 ```
 
-In general, throwing exceptions to the event loop is not recommended. Learn more about [uncaught exceptions](https://nodejs.org/docs/latest/api/process.html#process_event_uncaughtexception) in the documentation. Instead, use the `On Error Resume Next` pattern.
+In general, throwing exceptions to the event loop is not recommended. Errors that happen within asynchronous callbacks cannot be thrown and caught in a synchronous way. Learn more about [uncaught exceptions](https://nodejs.org/docs/latest/api/process.html#process_event_uncaughtexception) in the documentation. Instead, use the `On Error Resume Next` pattern.
 
-Instead of throwing the error, what happens if we do this:
+Instead of throwing the error, what happens if we do this (keep the `return` statement commented):
 ```
-if (true) {
+if (error) {
   console.log(error.message);
   return;
 }
@@ -114,6 +128,9 @@ request
   .on('data', (chunk) => postData += chunk)
   .on('end', () => route(handle, request, response, postData));
 ```
+
+For more information, read this guide titled [Anatomy of an HTTP Transaction
+](https://nodejs.org/en/docs/guides/anatomy-of-an-http-transaction/).
 
 
 # 7. Refactor File Upload Code & Input Validation (br0.7)

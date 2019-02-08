@@ -66,7 +66,7 @@ This may also be a good time to try out debugging the code in VS Code. There's a
 
 # 4. Setting up the Router (br0.4)
 
-We also have two new files:
+We have two new files:
 * `router.js`: This routes requests to different callbacks.
 * `requestHandlers.js`: This encapsulates all the request callbacks.
 
